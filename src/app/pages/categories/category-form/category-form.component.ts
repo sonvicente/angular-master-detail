@@ -18,7 +18,7 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     currentAction: string;
     categoryForm: FormGroup;
     pageTitle: string;
-    serverErrorMessage: string[];
+    serverErrorMessages: string[];
     submittingForm = false;
     category: Category = new Category();
 
@@ -123,9 +123,9 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
 
         // 422 não conseguiu gravar
         if (error.status === 422) {
-            this.serverErrorMessage = JSON.parse(error._body).errors;
+            this.serverErrorMessages = JSON.parse(error._body).errors;
         } else {
-            this.serverErrorMessage = ['falha na comunucação com o servidor'];
+            this.serverErrorMessages = ['falha na comunucação com o servidor'];
         }
     }
 
