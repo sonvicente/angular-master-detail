@@ -63,12 +63,18 @@ export class EntryService {
 
         const entries: Entry[] = [];
 
-        jsonData.forEach( element => entries.push(element as Entry));
+        jsonData.forEach( element => {
+            // precisa criar o objeto para pode pegar o getter no html
+            const entry = Object.assign( new Entry(), element);
+            entries.push(entry);
+        });
+
         return entries;
     }
 
     private jsonDataToEntry(jsonData: any): Entry {
-        return jsonData as Entry;
+        return Object.assign( new Entry(), jsonData);
+        // return jsonData as Entry;
     }
 
     private handelError(error: any): Observable<any> {
