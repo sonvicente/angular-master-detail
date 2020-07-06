@@ -166,9 +166,9 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
         toastr.success('Sucesso cadastrar');
 
         // retorna uma promisse - redirect / reload component
-        this.router.navigateByUrl('entry', { skipLocationChange: true })
+        this.router.navigateByUrl('entries', { skipLocationChange: true })
             .then(
-                () => this.router.navigate(['entry', entry.id, 'edit'])
+                () => this.router.navigate(['entries', entry.id, 'edit'])
             );
     }
 
