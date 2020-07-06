@@ -5,6 +5,7 @@ import { Entry } from '../shared/entry.model';
 import { EntryService } from '../shared/entry.service';
 
 import { Observable} from 'rxjs';
+import { map, tap, catchError, flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-entry-list',
@@ -27,7 +28,13 @@ export class EntryListComponent implements OnInit {
         //     error => alert('erro listar')
         // );
 
-        this.entries$ = this.entryService.getAll();
+        this.entries$ = this.entryService.getAll()
+            .pipe(
+                // ordenar id desc
+                // map(results => results.sort( (a, b) => b.id - a.id) )
+                // sort modifies existing array, it's more semantically correct to provide side effects in do/tap:
+                tap(results => results.sort( (a, b) => b.id - a.id) )
+            );
     }
 
     deleteEntry(entry: Entry){
