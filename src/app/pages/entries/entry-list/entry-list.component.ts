@@ -39,7 +39,12 @@ export class EntryListComponent implements OnInit {
 
     deleteEntry(entry: Entry){
 
+
+
+
         const mustDelete = confirm('deletar?');
+
+
 
         if (mustDelete) {
             this.entryService.delete(entry.id).subscribe(
