@@ -23,9 +23,9 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
     getAll(): Observable<T[]>{
         return this.http.get(this.apiPath).pipe(
             map(this.jsonDataToResources.bind(this)),
-            // passa pra funcao qual o this que deve ser usado
+            // .bind(this) => passa pra funcao qual o this que deve ser usado
             // da classe que está sendo instanciada
-            catchError(this.handelError)
+            catchError(this.handleError)
         );
     }
 
@@ -33,14 +33,14 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
         const url = `${this.apiPath}/${id}`;
         return this.http.get(url).pipe(
             map(this.jsonDataToResource.bind(this)),
-            catchError(this.handelError)
+            catchError(this.handleError)
         );
     }
 
     create(resource: T): Observable<T> {
         return this.http.post(this.apiPath, resource).pipe(
             map(this.jsonDataToResource.bind(this)),
-            catchError(this.handelError)
+            catchError(this.handleError)
         );
     }
 
@@ -50,7 +50,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
 
         return this.http.put(url, resource).pipe(
             map( () => resource ),
-            catchError(this.handelError)
+            catchError(this.handleError)
             /*
                 map(this.jsonDataToResource)
                 não dá pra ser com o map pois o in memory não retorna nada no put
@@ -63,7 +63,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
 
         return this.http.delete(url).pipe(
             map( () => null ),
-            catchError(this.handelError)
+            catchError(this.handleError)
         );
     }
 
@@ -83,7 +83,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
         return this.jsonDataToResourceFn(jsonData);
     }
 
-    protected handelError(error: any): Observable<any> {
+    protected handleError(error: any): Observable<any> {
         console.log('ERRO: ', error);
         return throwError(error);
     }

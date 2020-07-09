@@ -21,7 +21,7 @@ export class EntryService {
 
     getAll(): Observable<Entry[]>{
         return this.http.get(this.apiPath).pipe(
-            catchError(this.handelError),
+            catchError(this.handleError),
             map(this.jsonDataToEntries)
         );
     }
@@ -29,7 +29,7 @@ export class EntryService {
     getById(id: number): Observable<Entry> {
         const url = `${this.apiPath}/${id}`;
         return this.http.get(url).pipe(
-            catchError(this.handelError),
+            catchError(this.handleError),
             map(this.jsonDataToEntry)
         );
     }
@@ -48,14 +48,14 @@ export class EntryService {
 
                 // Observable<entry>
                 return this.http.post(this.apiPath, entry).pipe(
-                    catchError(this.handelError),
+                    catchError(this.handleError),
                     map(this.jsonDataToEntry)
                 );
             })
         );
 /*
         return this.http.post(this.apiPath, entry).pipe(
-            catchError(this.handelError),
+            catchError(this.handleError),
             map(this.jsonDataToEntry)
         );
 */
@@ -70,7 +70,7 @@ export class EntryService {
                 entry.category = category;
 
                 return this.http.put(url, entry).pipe(
-                    catchError(this.handelError),
+                    catchError(this.handleError),
                     map( () => entry )
                 );
             })
@@ -78,7 +78,7 @@ export class EntryService {
 
 /*
         return this.http.put(url, entry).pipe(
-            catchError(this.handelError),
+            catchError(this.handleError),
             map( () => entry )
             // map(this.jsonDataToEntry)
             // não dá pra ser assim pois o in memory não retorna nada no put
@@ -90,7 +90,7 @@ export class EntryService {
         const url = `${this.apiPath}/${id}`;
 
         return this.http.delete(url).pipe(
-            catchError(this.handelError),
+            catchError(this.handleError),
             map( () => null )
         );
     }
@@ -113,7 +113,7 @@ export class EntryService {
         // return jsonData as Entry;
     }
 
-    private handelError(error: any): Observable<any> {
+    private handleError(error: any): Observable<any> {
         console.log('ERRO: ', error);
         return throwError(error);
     }

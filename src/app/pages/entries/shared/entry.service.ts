@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { CategoryService } from '../../categories/shared/category.service';
@@ -16,7 +16,25 @@ export class EntryService extends BaseResourceService<Entry> {
         super('api/entries', injector, Entry.fromJson ); // Entry.fromJson passando a função para a classe super
     }
 
+    create(entry: Entry): Observable<Entry> {
+        return this.setCategoryAndSendToServer(entry, super.create.bind(this));
+    }
 
+    update(entry: Entry): Observable<Entry> {
+        return this.setCategoryAndSendToServer(entry, super.update.bind(this));
+    }
+
+    private setCategoryAndSendToServer(entry: Entry, sendFn: any): Observable<Entry>{
+        return this.categoryService.getById(entry.categoryId).pipe(
+          flatMap(category => {
+            entry.category = category;
+            return sendFn(entry);
+          }),
+          catchError(this.handleError)
+        );
+    }
+
+    /*
     create(entry: Entry): Observable<Entry> {
         return this.categoryService.getById(entry.categoryId).pipe(
             flatMap( category => {
@@ -33,6 +51,6 @@ export class EntryService extends BaseResourceService<Entry> {
                 return super.update(entry);
             })
         );
-
     }
+    */
 }
