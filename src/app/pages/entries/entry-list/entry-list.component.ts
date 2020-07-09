@@ -28,6 +28,10 @@ export class EntryListComponent implements OnInit {
         //     error => alert('erro listar')
         // );
 
+        this.getEntries();
+    }
+
+    getEntries(){
         this.entries$ = this.entryService.getAll()
             .pipe(
                 // ordenar id desc
@@ -48,8 +52,9 @@ export class EntryListComponent implements OnInit {
 
         if (mustDelete) {
             this.entryService.delete(entry.id).subscribe(
-                () => this.entries = this.entries.filter( entrada => entrada !== entry ),
-                () => alert('erro delete')
+                // () => this.entries = this.entries.filter( entrada => entrada !== entry ),
+                () => alert('erro delete'),
+                () => this.getEntries()
             );
         }
     }
