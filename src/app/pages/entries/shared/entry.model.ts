@@ -21,6 +21,11 @@ export class Entry  extends BaseResourceModel {
         revenew: 'receita'
     };
 
+    /* delega a criacao do objeto pro model */
+    static fromJson(jsonData: any): Entry{
+        return Object.assign( new Entry(), jsonData);
+    }
+
     get paidText(): string {
         return this.paid ? 'Pago' : 'Pendente';
     }
