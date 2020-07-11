@@ -23,20 +23,15 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
         );
     }
 
-    deleteEntry(entry: Entry){
-
-
-
+    deleteResource(resource: T){
 
         const mustDelete = confirm('deletar?');
 
-
-
         if (mustDelete) {
-            this.entryService.delete(entry.id).subscribe(
-                // () => this.entries = this.entries.filter( entrada => entrada !== entry ),
+            this.resourceService.delete(resource.id).subscribe(
+                () => this.resources = this.resources.filter( element => element !== resource ),
                 () => alert('erro delete'),
-                () => this.getEntries()
+                // () => this.getEntries()
             );
         }
     }
