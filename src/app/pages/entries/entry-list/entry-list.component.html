@@ -17,7 +17,7 @@
 </div>
 
 
-<table class="table table-hover" *ngIf="entries$ | async as entries; else loading">
+<table class="table table-hover" *ngIf="resources; else loading">
     <thead>
         <tr class="bg-light">
             <th>Lançamento</th>
@@ -28,7 +28,7 @@
     </thead>
     <tbody>
         <!-- <tr *ngFor="let entry of entries$ | async"> -->
-        <tr *ngFor="let entry of entries">
+        <tr *ngFor="let entry of resources">
             <td>
                 <strong>{{entry.name}}</strong><br />
                 <small class="text-success">{{entry.date}}</small> <br />
@@ -50,7 +50,7 @@
             </td>
             <td class="text-center">
                 <a [routerLink]="[entry.id,'edit']" class="btn btn-outline-info btn-sm"> Editar </a>
-                <button (click)="deleteEntry(entry)" class="btn btn-outline-danger btn-sm ml-2"> Excluir </button>
+                <button (click)="deleteResource(entry)" class="btn btn-outline-danger btn-sm ml-2"> Excluir </button>
             </td>
         </tr>
     </tbody>
