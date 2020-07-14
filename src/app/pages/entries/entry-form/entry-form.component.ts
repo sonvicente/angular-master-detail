@@ -59,7 +59,14 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry> impleme
     get typeOptions(): Array<any>{
         return Object.entries(Entry.types).map(
             ([value, text]) => {
-                return {text, value};
+                return {
+                    text,
+                    value
+                };
+                // return {
+                //     text: text,
+                //     value: value
+                // }
             }
         );
     }
@@ -83,8 +90,8 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry> impleme
         /* resourceForm criado na classe pai */
         this.resourceForm = this.formBuilder.group({
             id: [ null ],
-            name: [ null, [ Validators.required, Validators.minLength(2) ] ],
-            description: [ null ],
+            name: ['', [Validators.required, Validators.minLength(3)]],
+            description: ['', [Validators.required, Validators.minLength(3)]],
             type: [ 'expense', [ Validators.required ]],
             amount: [ null, [ Validators.required ]],
             date: [ null, [ Validators.required ]],

@@ -2,16 +2,12 @@
     [itens]="[{text:'Categorias', link: '/categories'}, {text: pageTitle}]">
 </app-bread-crumb>
 
-<div class="row mb-4">
-    <div class="col-md">
-        <h1 class="h2 border-left pl-2">
-            {{pageTitle}}
-        </h1>
-    </div>
-    <div class="col-md">
-        <a routerLink="/categories" class="btn btn-light float-right"> voltar</a>
-    </div>
-</div>
+<app-page-header
+    [page-title] = "pageTitle"
+    button-class = "btn-light"
+    button-text = "voltar"
+    button-link = "/categories">
+</app-page-header>
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
 
@@ -25,11 +21,7 @@
                 <div class="form-group col-md-4">
                     <label for="name">Nome</label>
                     <input type="text" class="form-control" id="name" formControlName="name">
-
-                    <div class="text-danger" *ngIf="resourceForm.get('name').invalid && resourceForm.get('name').touched">
-                        <div *ngIf="resourceForm.get('name').errors.required"> Obrigatório</div>
-                        <div *ngIf="resourceForm.get('name').errors.minlenght"> Minimo 2 caracteres</div>
-                    </div>
+                    <app-form-field-error [control]="resourceForm.get('name')" ></app-form-field-error>
                 </div>
 
                 <div class="form-group col-md-8">
@@ -40,12 +32,7 @@
         </div>
     </div>
 
-    <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
-        <strong>Erros Serividor:</strong>
-        <ul>
-            <li *ngFor="let error of serverErrorMessages">{{error}}</li>
-        </ul>
-    </div>
+    <app-server-error-messages [serverErrorMessages]="serverErrorMessages"></app-server-error-messages>
 
     <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3">
         Salvar
