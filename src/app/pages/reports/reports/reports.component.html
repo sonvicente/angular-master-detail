@@ -3,7 +3,8 @@
 </app-bread-crumb>
 
 <app-page-header
-    page-title = "Relatório de receitas e despesas">
+    page-title = "Relatório de receitas e despesas"
+    [showButton] = "false">
 </app-page-header>
 
 <div class="card">
@@ -61,8 +62,7 @@
         </div>
         <div class="card-body">
             <h3 class="card-title">
-                1000
-                <!-- {{revenueTotal}} -->
+                {{revenueTotal}}
             </h3>
         </div>
     </div>
@@ -73,8 +73,7 @@
         </div>
         <div class="card-body">
             <h3 class="card-title">
-                1000
-                <!-- {{expenseTotal}} -->
+                {{expenseTotal}}
             </h3>
         </div>
     </div>
@@ -85,8 +84,7 @@
         </div>
         <div class="card-body">
             <h3 class="card-title">
-                1000
-                <!-- {{balance}} -->
+                {{balance}}
             </h3>
         </div>
     </div>
@@ -96,12 +94,10 @@
 
 <div class="row mt-5 mb-4">
     <div class="col-md-6">
-        grafico
-        <!-- <p-chart type="bar" [data]="revenueChartData" [options]="chartOptions"></p-chart> -->
+        <p-chart type="bar" [data]="revenueChartData" [options]="chartOptions"></p-chart>
     </div>
 
     <div class="col-md-6">
-        grafico
-        <!-- <p-chart type="bar" [data]="expenseChartData" [options]="chartOptions"></p-chart> -->
+        <p-chart type="bar" [data]="expenseChartData" [options]="chartOptions"></p-chart>
     </div>
 </div>

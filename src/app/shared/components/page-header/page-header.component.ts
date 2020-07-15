@@ -7,6 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PageHeaderComponent implements OnInit {
 
+    @Input() showButton: boolean = true;
+
     @Input('page-title') pageTitle: string;
     @Input('button-class') buttonClass: string;
     @Input('button-text') buttonText: string;
