@@ -68,7 +68,6 @@ export class ReportsComponent implements OnInit {
     }
 
     private calculateBalance(){
-        console.log(this.entries);
         let expenseTotal = 0;
         let revenueTotal = 0;
 
